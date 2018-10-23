@@ -5,9 +5,7 @@ RUN apk update && \
 RUN go get -d github.com/elves/elvish && \
     make -C /go/src/github.com/elves/elvish get
 # Build gotty
-RUN go get -d github.com/yudai/gotty && \
-    git -C /go/src/github.com/yudai/gotty checkout release-1.0 && \
-    go get github.com/yudai/gotty
+RUN go get github.com/yudai/gotty
 
 FROM alpine
 
