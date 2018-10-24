@@ -5,6 +5,7 @@ elf=elf-$$
 
 adduser -D -G elves $elf -s /bin/elvish
 cleanup() {
+    trap - EXIT
     deluser --remove-home $elf
 }
 trap cleanup EXIT
