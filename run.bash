@@ -3,10 +3,10 @@ set -e
 
 elf=elf-$$
 
-nohup adduser -D -G elves $elf -s /bin/elvish
+nohup adduser -D -G elves $elf -s /bin/elvish > /dev/null
 cleanup() {
     trap - EXIT
-    nohup deluser --remove-home $elf
+    nohup deluser --remove-home $elf > /dev/null
 }
 trap cleanup EXIT
 
