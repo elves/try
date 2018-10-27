@@ -18,6 +18,7 @@ COPY --from=builder /go/bin/gotty /bin/gotty
 RUN mkdir /app
 COPY run.bash /root/run.bash
 COPY gotty.conf /root/.gotty
+COPY notice /etc/notice
 
 WORKDIR /root
 EXPOSE 80

@@ -10,5 +10,6 @@ cleanup() {
 }
 trap cleanup EXIT
 
+cat /etc/notice
 cd /home/$elf
 su $elf
