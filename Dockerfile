@@ -2,15 +2,18 @@ FROM golang:alpine as builder
 RUN apk update && \
     apk add --virtual build-deps make git
 # Build Elvish
-RUN go get -d github.com/elves/elvish && \
-    make -C /go/src/github.com/elves/elvish get
+RUN mkdir -p /data/elvish && \
+    cd /data/elvish && \
+    git clone --depth 1 --branch v0.14.1 https://github.com/elves/elvish . && \
+    CGO_ENABLED=0 make get
 # Build gotty
 RUN go get github.com/yudai/gotty
 
 FROM alpine
 
 RUN addgroup elves
-RUN apk update && apk add tmux man man-pages vim curl git bash
+# Useful packages for users of try.elv.sh
+RUN apk update && apk add tmux mandoc man-pages vim curl git bash
 
 COPY --from=builder /go/bin/elvish /bin/elvish
 COPY --from=builder /go/bin/gotty /bin/gotty
