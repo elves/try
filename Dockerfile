@@ -4,8 +4,8 @@ RUN apk update && \
 # Build Elvish
 RUN mkdir -p /data/elvish && \
     cd /data/elvish && \
-    git clone --depth 1 --branch v0.14.1 https://github.com/elves/elvish . && \
-    CGO_ENABLED=0 make get
+    git clone --depth 1 --branch v0.15.0 https://github.com/elves/elvish . && \
+    CGO_ENABLED=0 ELVISH_REPRODUCIBLE=release make get
 # Build gotty
 RUN go get github.com/yudai/gotty
 
