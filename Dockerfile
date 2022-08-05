@@ -2,8 +2,9 @@
 FROM golang:1.19.0-alpine3.16 as builder
 RUN apk update && \
     apk add --virtual build-deps make git
-RUN go install src.elv.sh/cmd/elvish@v0.18.0
-RUN go install github.com/sorenisanerd/gotty@v1.4.0
+RUN export CGO_ENABLED=0 && \
+    go install src.elv.sh/cmd/elvish@v0.18.0 && \
+    go install github.com/sorenisanerd/gotty@v1.4.0
 
 # Runtime image
 FROM alpine:3.16
