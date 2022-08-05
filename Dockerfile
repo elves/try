@@ -1,15 +1,12 @@
-FROM golang:alpine as builder
+FROM golang:1.19.0-alpine3.16 as builder
 RUN apk update && \
     apk add --virtual build-deps make git
 # Build Elvish
-RUN mkdir -p /data/elvish && \
-    cd /data/elvish && \
-    git clone --depth 1 --branch v0.15.0 https://github.com/elves/elvish . && \
-    CGO_ENABLED=0 ELVISH_REPRODUCIBLE=release make get
+RUN CGO_ENABLED=0 go install src.elv.sh/cmd/elvish@v0.18.0
 # Build gotty
 RUN go get github.com/yudai/gotty
 
-FROM alpine
+FROM alpine:3.16
 
 RUN addgroup elves
 # Useful packages for users of try.elv.sh
