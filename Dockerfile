@@ -11,7 +11,7 @@ FROM alpine:3.19
 
 RUN addgroup elves
 # Useful packages for users of try.elv.sh
-RUN apk update && apk add tmux mandoc man-pages vim curl git bash
+RUN apk update && apk add tmux mandoc man-pages vim curl git bash kakoune ripgrep fd pijul eza
 
 COPY --from=builder /go/bin/elvish /bin/elvish
 COPY --from=builder /go/bin/gotty /bin/gotty
