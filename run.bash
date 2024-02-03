@@ -12,4 +12,9 @@ trap cleanup EXIT
 
 cat /etc/notice
 cd /home/$elf
+if test -n "$1"; then
+    printf '%s' "$1" > setup
+    chown $elf setup
+    chmod +x setup
+fi
 su $elf
