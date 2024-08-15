@@ -1,13 +1,13 @@
 # Build Elvish and gotty in a separate builder image
-FROM golang:1.21.6-alpine3.19 as builder
+FROM golang:1.23.0-alpine3.20 as builder
 RUN apk update && \
     apk add --virtual build-deps make git
 RUN export CGO_ENABLED=0 && \
-    go install src.elv.sh/cmd/elvish@master && \
+    go install src.elv.sh/cmd/elvish@v0.21.0 && \
     go install github.com/sorenisanerd/gotty@v1.5.0
 
 # Runtime image
-FROM alpine:3.19
+FROM alpine:3.20
 
 RUN addgroup elves
 # Useful packages for users of try.elv.sh
